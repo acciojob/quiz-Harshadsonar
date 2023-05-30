@@ -1,16 +1,128 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
-	<link rel="stylesheet" href="styles.css">
+    <title>Quiz App</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;0,900;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
 </head>
 
 <body>
-	<!-- the entire body must be written by student -->
-    <script type="text/javascript" src="./script.js">
-</script>
+    <div class="quiz-container" id="quiz">
+        <h2 id="question"></h2>
+        <label>
+            <input type="radio" name="option" id="a" />
+            <span id="a_text"></span>
+        </label>
+        <label>
+            <input type="radio" name="option" id="b" />
+            <span id="b_text"></span>
+        </label>
+        <label>
+            <input type="radio" name="option" id="c" />
+            <span id="c_text"></span>
+        </label>
+        <label>
+            <input type="radio" name="option" id="d" />
+            <span id="d_text"></span>
+        </label>
+        <button id="submit">Submit</button>
+        <p id="result"></p>
+        <button id="reload">Reload Quiz</button>
+    </div>
 
+    <script>
+        // Quiz data
+        const questions = [{
+            question: "Which language runs in a web browser?",
+            a: "Java",
+            b: "C",
+            c: "Python",
+            d: "JavaScript",
+            correct: "d",
+        }, {
+            question: "What does CSS stand for?",
+            a: "Central Style Sheets",
+            b: "Cascading Style Sheets",
+            c: "Cascading Simple Sheets",
+            d: "Cars SUVs Sailboats",
+            correct: "b",
+        }, {
+            question: "What does HTML stand for?",
+            a: "Hypertext Markup Language",
+            b: "Hypertext Markdown Language",
+            c: "Hyperloop Machine Language",
+            d: "Helicopters Terminals Motorboats Lamborginis",
+            correct: "a",
+        }, {
+            question: "What year was JavaScript launched?",
+            a: "1996",
+            b: "1995",
+            c: "1994",
+            d: "none of the above",
+            correct: "b",
+        }];
+
+        // Quiz variables
+        let currentQuestion = 0;
+        let score = 0;
+        const quizContainer = document.getElementById("quiz");
+        const questionElement = document.getElementById("question");
+        const optionA = document.getElementById("a");
+        const optionB = document.getElementById("b");
+        const optionC = document.getElementById("c");
+        const optionD = document.getElementById("d");
+        const optionAText = document.getElementById("a_text");
+        const optionBText = document.getElementById("b_text");
+        const optionCText = document.getElementById("c_text");
+        const optionDText = document.getElementById("d_text");
+        const submitButton = document.getElementById("submit");
+        const resultElement = document.getElementById("result");
+        const reloadButton = document.getElementById("reload");
+
+        // Load question
+        function loadQuestion() {
+            const currentQuiz = questions[currentQuestion];
+            questionElement.textContent = currentQuiz.question;
+            optionAText.textContent = currentQuiz.a;
+            optionBText.textContent = currentQuiz.b;
+            optionCText.textContent = currentQuiz.c;
+            optionDText.textContent = currentQuiz.d;
+        }
+
+        // Check answer
+        function checkAnswer() {
+            const currentQuiz = questions[currentQuestion];
+            const selectedOption = document.querySelector("input[name='option']:checked");
+            if (selectedOption && selectedOption.id === currentQuiz.correct) {
+                score++;
+            }
+        }
+
+        // Show next question or result
+        function showNext() {
+            checkAnswer();
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                loadQuestion();
+            } else {
+                quizContainer.style.display = "none";
+                resultElement.textContent = "You scored " + score + " out of " + questions.length + "!";
+                reloadButton.style.display = "block";
+            }
+        }
+
+        // Event listeners
+        submitButton.addEventListener("click", showNext);
+        reloadButton.addEventListener("click", function() {
+            location.reload();
+        });
+
+        // Initial setup
+        loadQuestion();
+    </script>
 </body>
 
 </html>

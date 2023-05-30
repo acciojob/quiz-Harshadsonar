@@ -1,1 +1,38 @@
 /*  your css code here. If applicable */
+/*  your css code here. If applicable */
+
+.quiz-container {
+    color: black;
+    margin: 0px;
+    box-sizing: border-box;
+    padding: 100px 450px;
+    background-color: rgb(173, 173, 252);
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-family: 'Poppins', sans-serif;
+}
+
+#question {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+#submit {
+    margin: 20px;
+    display: flex;
+}
+
+#result {
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+#reload {
+    display: none;
+    margin-top: 10px;
+}
